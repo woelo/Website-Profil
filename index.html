@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Pribadi</title>
+    <style>
+        html {
+  scroll-behavior: smooth;
+}
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        header {
+            padding: 20px;
+            text-align: center;
+            background-color: #1f1f1f;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        header .brand {
+            color: #bb86fc;
+            font-weight: bold;
+            font-size: 1.7em;
+            position: absolute;
+            left: 16px;
+            top: 55%;
+            transform: translateY(-50%);
+        }
+        header .brand .mad {
+            color: #bb86fc;
+        }
+        header .brand .r {
+            color: #ffffff;
+        }
+
+        header nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            padding-left: 70px; /* Add padding to make space for the brand text */
+        }
+        header nav a {
+            margin: 0 13px;
+            color: #bb86fc;
+            text-decoration: none;
+        }
+        header nav a:hover {
+            color: #ffffff;
+        }
+        .intro {
+            padding: 120px 20px 20px 20px; /* Adjust padding to account for the fixed header */
+            text-align: center;
+        }
+        .intro img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .intro p {
+            max-width: 550px;
+            margin: 0 auto;
+        }
+        .articles {
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.5s ease-out;
+        }
+        .article {
+            background-color: #1f1f1f;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 9);
+        }
+        .article h2 {
+            margin-top: 0;
+            color: #bb86fc;
+        }
+        .contact-bar {
+            background-color: #1f1f1f;
+            padding: 40px;
+            text-align: center;
+            position: fixed
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 10);
+            z-index: 1000;
+            margin-top:70px;
+        }
+        .contact-bar a {
+            text-align: center;
+            padding-right: 5px;
+            color: #bb86fc;
+            text-decoration: none;
+            
+        }
+        .contact-bar a:hover {
+            color: #ffffff;
+        }
+        .slide-container {
+            display: flex;
+            overflow-x: scroll;
+            scrollbar-width: none;
+            margin: 20px 0;
+            
+        }
+        .slide-container::-webkit-scrollbar {
+            display: none;
+        }
+        .slide {
+            min-width: 900px;
+            margin: 400px;
+            justify-content: center;
+            justify-items: center;
+            background-color: #1f1f1f;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+        }
+        .slide h2 {
+            margin-top: 0;
+            color: #bb86fc;
+        }
+        .slide p {
+            margin: 0;
+        }
+        
+        .html{
+          color:white;
+        }
+          slider {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        
+        .bodi{
+           font-family: Arial, sans-serif;
+           border-radius: 7px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            margin: 0;
+
+        }
+        
+
+        .slider {
+           justify-content: center;
+            position: relative;
+            width: 35%;
+            max-width: 600px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+            background-color: #1f1f1f;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+            cursor: grab;
+        }
+
+        .card {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            text-align: center;
+            user-select: none;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .message-btn {
+            display: block;
+            margin: 12px auto 0;
+            padding: 6px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius:5209px;
+            cursor: pointer;
+            font-size: 13px;
+            box-shadow:0 4px 8px rgba( 0, 0, 0, 1);
+        }
+
+        .message-btn:hover {
+            background-color: #eaeaea;
+        }
+        
+        .message-btn > a{
+          color: white;
+          text-decoration: none;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: ;: 0 4px 8px rgba( 0, 0, 0,  1);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            user-select: none;
+        }
+
+        .prev {
+            right: 120px;
+            margin:145px;
+        }
+
+        .next {
+            left: 120px;
+            margin:145px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 1);
+        }
+        
+        
+        
+        .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    gap: 1px;
+}
+
+.image-box {
+    display: flex;
+    align-items: center;
+    border: 2px solid #616161;
+    border-radius: 8px;
+    padding: 10px;
+    width: 90px; /* Lebar kotak sesuai kebutuhan */
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 2, 9, 0.6);
+}
+
+.image-box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -10px; /* Sesuaikan jarak tambahan ke kanan */
+    width: 10px; /* Lebar tambahan border */
+    height: ;
+    border-right: 10px solid #ccc; /* Warna dan lebar border tambahan */
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+
+}
+
+.image-box img {
+    width: 30px; /* Atur lebar gambar sesuai kebutuhan */
+    border-radius: 5px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.image-box p {
+    margin: 0;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 450;
+
+}
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <span class="mad">«mad</span><span class="r">R»</span>
+        </div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#articles">Articles</a>
+            <a href="#sosmed">Follow Me</a>
+
+        </nav>
+    </header>
+    <div class="intro">
+        <img src="mamat.jpg" alt="Ahmad's Profile Picture">
+        <p><h2>Hello World!</h2><hr>I'm Ahmad, a beginner program coder student,I've only been learning programming for about <i>3 months</i> and still,and this is a website that I made in only with <b>HTML,CSS,JS.</b></p>
+        <hr>
+        <p>
+          When creating this website I used a simple device,namely Android only and supported by <strong>ChatGPTo-4.</strong>
+        </p>
+        <hr>
+        <p>
+      I hope I can develop this skill and can become a <b>Full Stack Web Developer</b> one day, because this is not a <b>short journey</b>.
+        </p><hr>
+        <p>
+          You don't need to know too much about me,I just want to show you a test of my website profile,thats it.
+        </p><hr>
+        <p>
+          <font size="1">scrolldown</font>
+          </p>
+    </div>
+    <div class="articles" id="articles">
+        <div class="article">
+            <h2>About This Website</h2>
+            <p>Website ini hanya dibuat dengan menggunakan device sederhana dibantu oleh kecanggihan teknologi AI. Tujuan utama dari website ini adalah untuk menunjukkan bagaimana teknologi modern dapat membantu dalam pengembangan web, bahkan bagi programmer pemula.</p>
+            <p>
+              Kemajuan teknologi, terutama dalam Artificial Intelligence (AI), berkembang pesat dan memengaruhi berbagai aspek kehidupan kita. Inovasi seperti machine learning memungkinkan komputer untuk belajar dari data dan membuat keputusan yang lebih akurat. Dampak ini membuka peluang baru di berbagai industri dan meningkatkan efisiensi.</p>
+
+<p>
+Artificial Intelligence (AI) adalah cabang ilmu komputer yang menciptakan sistem dengan kemampuan mirip manusia. Dimulai pada tahun 1950-an, AI menggunakan algoritma untuk menganalisis data, belajar dari pola, dan membuat prediksi. Kini, AI mencakup berbagai teknologi, dari sistem berbasis aturan hingga model pembelajaran mendalam.</p>
+
+<p>
+Sama hal nya seperti website ini,AI dapat dimanfaatkan dalam pembuatan website untuk desain, pengalaman pengguna, dan dukungan pelanggan. Alat berbasis AI membantu dalam menentukan tata letak dan warna yang optimal, serta menyediakan chatbots untuk interaksi otomatis. Penggunaan AI meningkatkan fungsionalitas dan daya tarik website secara keseluruhan.
+            </p>
+            <p>
+            <p id="sosmed"></p>   
+              Awalnya website ini mau saya buat seperti "Link Tree" tapi ini kurang ada kesamaan dengan website profil pribadi,dan memang belum banyak fitur dan interaktifitas pada webs ini.
+            </p>
+
+        </div>
+        <div class="bodi">
+            <div class="slider">
+        <div class="slides">
+            <div class="card">
+                <img src="instagram.png" alt="1.jpg">
+                <button class="message-btn"> <a href="https://www.instagram.com/01000001r?igsh=dWZ3bHlnOG85c3Bu">+Follow</a></button>
+            </div>
+            <div class="card">
+                <img src="tiktok.png" alt="2.jpg">
+                <button class="message-btn"><a href="https://www.tiktok.com/@01000001r_?_t=8oGCsyT0lZB&_r=1">+Follow</a></button>
+            </div>
+            <div class="card">
+                <img src="github.png" alt="3.jpg">
+                <button class="message-btn"><a href="https://github.com/woelo">+Follow</a></button>
+            </div>
+            <div class="card">
+                <img src="whatsapp.png" alt="WhatsApp">
+                <button class="message-btn">Message</button>
+            </div>
+            <div class="card">
+                <img src="telegram.png" alt="Telegram">
+                <button class="message-btn">Message</button>
+            </div>
+        </div>
+    </div>
+  </div>
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+    <br>
+        <div class="article">
+            <h2>Belajar HTML</h2>
+            <p>HTML adalah bahasa markup yang digunakan untuk membuat struktur halaman web...</p>
+            <a href=" https://www.w3schools.com/html/" class="html">Learn Here</a>
+            
+        </div>
+        <div class="article">
+            <h2>Belajar CSS</h2>
+            <p>CSS adalah bahasa stylesheet yang digunakan untuk mendesain tampilan halaman web...</p>
+            <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.w3schools.com/css/&ved=2ahUKEwjTvaDn-LyHAxUiyDgGHcJjDr0QFnoECBMQAQ&usg=AOvVaw0Xtbw_GBAChsgvZNkPLVGb" class="html">Learn Here</a>
+        </div>
+        <div class="article">
+            <h2>Belajar JavaScript</h2>
+            <p>JavaScript adalah bahasa pemrograman yang digunakan untuk membuat halaman web interaktif...</p>
+            <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.w3schools.com/js/&ved=2ahUKEwjO37yI-byHAxWCxTgGHabZBL8QFnoECBcQAQ&usg=AOvVaw0InYy1JO9V7729n-hfV1ti" class="html">Learn here</a>
+        </div><br><br><br>
+    </div>
+    
+    
+      <div id="tab">
+      <h3 style="text-align:center;">Tech Stack</h3>
+    <div class="container">
+        <div class="image-box">
+            <img src="html.png" alt="HTML">
+            <p>HTML</p>
+        </div>
+        <div class="image-box">
+            <img src="css.png" alt="CSS">
+            <p>CSS</p>
+        </div>
+        <div class="image-box">
+            <img src="js.png" alt="JS">
+            <p>Jawa Script</p>
+        </div>
+        <h3>Coding Tools</h3>
+    <div class="container">
+        <div class="image-box">
+            <img src="acode.png" alt="Acode">
+            <p>Acode</p>
+        </div>
+        <div class="image-box">
+            <img src="cgpt.png" alt="Cgpt">
+            <p>ChatGPT</p>
+        </div>
+        <div class="image-box">
+            <img src="cx.jpg" alt="VS File Explorer">
+            <p>CX File Explorer</p>
+        </div>
+        <h3>Hostinger</h3>
+    <div class="container">
+        <div class="image-box">
+            <img src="github.jpg" alt="github">
+            <p>Github</p>
+        </div>
+        <div class="image-box">
+            <img src="tiiny.png" alt="tiiny">
+            <p>Tiiny</p>
+        </div>
+        <div class="image-box">
+            <img src="niaga.jpg" alt="niaga">
+            <p>Niaga Hosting</p>
+        </div>
+        </div>
+        <!-- Tambahkan lebih banyak kotak gambar di sini -->
+    </div>
+    
+    <div class="contact-bar" id="contact">
+        <h4>®2024 AhmadR</h4>
+        <a href="https://wa.me/6282158717517">CONTACT DEV</a>
+        <a href="https://www.instagram.com/01000001r?igsh=dWZ3bHlnOG85c3Bu" target="_blank">INSTAGRAM</a>
+        <a href="https://www.tiktok.com/@01000001r_?_t=8oGCsyT0lZB&_r=1" target="_blank">TIKTOD</a>
+    </div>
+    
+    <script>
+        // Event listener to show articles when scrolled to the bottom
+        window.addEventListener('scroll', function() {
+            var articles = document.getElementById('articles');
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+                articles.style.opacity = 1;
+                articles.style.transform = 'translateY(1)';
+            }
+        });
+    </script>
+        <script>
+        let currentSlide = 0;
+        let isDragging = false;
+        let startPos = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID;
+        const slides = document.querySelector('.slides');
+        const totalSlides = document.querySelectorAll('.slides .card').length;
+
+        function moveSlide(step) {
+            currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+            updateSlidePosition();
+        }
+
+        function updateSlidePosition() {
+            currentTranslate = -currentSlide * 100;
+            slides.style.transform = `translateX(${currentTranslate}%)`;
+        }
+
+        function startDrag(event) {
+            isDragging = true;
+            startPos = getPositionX(event);
+            slides.style.cursor = 'grabbing';
+            animationID = requestAnimationFrame(animation);
+        }
+
+        function drag(event) {
+            if (!isDragging) return;
+            const currentPosition = getPositionX(event);
+            const diff = currentPosition - startPos;
+            slides.style.transform = `translateX(${currentTranslate + diff}px)`;
+        }
+
+        function endDrag() {
+            if (!isDragging) return;
+            isDragging = false;
+            cancelAnimationFrame(animationID);
+            slides.style.cursor = 'grab';
+            const movedBy = currentTranslate + getPositionX(event) - startPos;
+            if (movedBy < -50) {
+                moveSlide(1);
+            } else if (movedBy > 50) {
+                moveSlide(-1);
+            } else {
+                updateSlidePosition();
+            }
+        }
+
+        function getPositionX(event) {
+            return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+        }
+
+        function animation() {
+            if (isDragging) requestAnimationFrame(animation);
+        }
+
+        slides.addEventListener('mousedown', startDrag);
+        slides.addEventListener('mouseup', endDrag);
+        slides.addEventListener('mousemove', drag);
+        slides.addEventListener('mouseleave', endDrag);
+
+        slides.addEventListener('touchstart', startDrag);
+        slides.addEventListener('touchend', endDrag);
+        slides.addEventListener('touchmove', drag);
+    </script>
+</body>
+</html>
